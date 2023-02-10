@@ -18,6 +18,10 @@ class RawMaterialRoutes implements Routes {
       `${this.path}`,
       this.rawMaterialontroller.createRawMaterial
     );
+    this.router.put(
+      `${this.path}`,
+      this.rawMaterialontroller.updateRawMaterial
+    );
   }
 }
 

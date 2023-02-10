@@ -1,4 +1,4 @@
-import { IsString, IsNumber } from "class-validator";
+import { IsString, IsNumber, IsUUID } from "class-validator";
 
 export class CreateRawMaterialDto {
   @IsString()
@@ -7,4 +7,14 @@ export class CreateRawMaterialDto {
   public type: string;
   @IsNumber()
   public quantity: number;
+}
+export class UpdateRawMaterialDto {
+  @IsUUID()
+  public id: string;
+  @IsString()
+  public name?: string;
+  @IsString()
+  public type?: string;
+  @IsNumber()
+  public quantity?: number;
 }

@@ -8,7 +8,17 @@ POST {{baseURLRawMaterial}}/
 Content-Type: application/json
 
 {
-    "name": "Hathi",
+    "name": "Diamond",
     "type": "acrylic",
-	"quantity": 100
+	"quantity": 500
+}
+
+###
+# Update raw material
+PUT {{baseURLRawMaterial}}/
+Content-Type: application/json
+
+{
+    "id": "e51e9ab4-1f58-4a36-96f2-5b4e1263d068",
+	"quantity": 350
 }
