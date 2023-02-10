@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Assembly {
+  id             String      @id @unique
+  date_assigned  DateTime
+  date_completed DateTime?
+  completed      Boolean?
+  workerId       String
+  rawMaterialId  String
+  RawMaterial    RawMaterial @relation(fields: [rawMaterialId], references: [id])
+  Worker         Worker      @relation(fields: [workerId], references: [id])
+}
+
+model RawMaterial {
+  id         String     @id @unique
+  name       String
+  type       String
+  quantity   Int
+  date_added DateTime   @default(now())
+  Assembly   Assembly[]
+}
+
+model Worker {
+  id       String     @id @unique
+  name     String
+  phone    Int
+  address  String?
+  Assembly Assembly[]
+}
