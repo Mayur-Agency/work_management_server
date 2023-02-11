@@ -1,36 +1,36 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch","fullTextIndex"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+model Worker {
+  id       String     @id @unique @default(uuid())
+  name     String
+  phone    Int
+  address  String?
+  Assembly Assembly[]
+}
 
 model Assembly {
-  id             String      @id @unique
-  date_assigned  DateTime
-  date_completed DateTime?
+  id             String      @id @unique @default(uuid())
+  worker_id      Worker      @relation(fields: [workerId], references: [id])
+  date_assigned  DateTime    @updatedAt
+  date_completed DateTime?   @updatedAt
   completed      Boolean?
+  raw_material   RawMaterial @relation(fields: [rawMaterialId], references: [id])
   workerId       String
   rawMaterialId  String
-  RawMaterial    RawMaterial @relation(fields: [rawMaterialId], references: [id])
-  Worker         Worker      @relation(fields: [workerId], references: [id])
 }
 
 model RawMaterial {
-  id         String     @id @unique
+  id         String     @id @unique @default(uuid())
   name       String
   type       String
   quantity   Int
   date_added DateTime   @default(now())
   Assembly   Assembly[]
-}
-
-model Worker {
-  id       String     @id @unique
-  name     String
-  phone    Int
-  address  String?
-  Assembly Assembly[]
 }
