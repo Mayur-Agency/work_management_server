@@ -19,18 +19,18 @@ GET {{baseURLWorker}}?searchTerm=kan
 
 ###
 # Get workers by ID
-GET {{baseURLWorker}}/54b78608-fcb0-4d58-adcd-40e093999589
+GET {{baseURLWorker}}/896a09a4-de63-4177-9a77-d38087751992
 
 ###
 # Delete raw material by ID
-DELETE  {{baseURLWorker}}/54b78608-fcb0-4d58-adcd-40e093999589
+DELETE  {{baseURLWorker}}/896a09a4-de63-4177-9a77-d38087751992
 
 ###
 # Update raw material
-PUT {{baseURLWorker}}/54b78608-fcb0-4d58-adcd-40e093999589
+PUT {{baseURLWorker}}/896a09a4-de63-4177-9a77-d38087751992
 Content-Type: application/json
 
 {   
-    "id": "54b78608-fcb0-4d58-adcd-40e093999589",
+    "id": "896a09a4-de63-4177-9a77-d38087751992",
 	"phone": "+919322404040"
 }

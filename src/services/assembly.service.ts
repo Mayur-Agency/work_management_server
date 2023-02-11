@@ -8,17 +8,6 @@ export class AssemblyService {
     assemblyData: Prisma.AssemblyCreateInput
   ): Promise<Assembly> {
     console.log(assemblyData);
-    /**
-     * {
-    "worker_id": {
-        "connect": [{"id": "054d43d8-6c59-4700-971a-8a72ed7dd04b"}]
-    },
-    "raw_material": {
-        "connect": [{"id": "4f7f0833-3d89-476f-8aa6-81bcc2f8b469"}]
-    },
-    "quantity": 50
-}
-     */
     if (isEmpty(assemblyData)) {
       throw new HttpException(400, "raw Material data is empty");
     }

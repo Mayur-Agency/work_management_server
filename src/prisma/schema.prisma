@@ -17,22 +17,21 @@ model Worker {
 }
 
 model Assembly {
-  id             String      @id @unique @default(uuid())
-  worker_id      Worker      @relation(fields: [workerId], references: [id])
-  date_assigned  DateTime    @default(now()) @updatedAt
-  date_completed DateTime?   @updatedAt
-  completed      Boolean?    @default(false)
-  raw_material   RawMaterial @relation(fields: [rawMaterialId], references: [id])
+  id             String        @id @unique @default(uuid())
+  worker_id      Worker        @relation(fields: [workerId], references: [id])
+  date_assigned  DateTime      @updatedAt
+  date_completed DateTime?     @updatedAt
+  completed      Boolean?
+  raw_material   RawMaterial[]
   workerId       String
-  rawMaterialId  String
-  quantity       Int
 }
 
 model RawMaterial {
-  id         String     @id @unique @default(uuid())
+  id         String    @id @unique @default(uuid())
   name       String
   type       String
   quantity   Int
-  date_added DateTime   @default(now())
-  Assembly   Assembly[]
+  date_added DateTime  @default(now())
+  Assembly   Assembly? @relation(fields: [assemblyId], references: [id])
+  assemblyId String?
 }

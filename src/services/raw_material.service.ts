@@ -1,9 +1,5 @@
-import { PrismaClient, RawMaterial } from "@prisma/client";
+import { Prisma, PrismaClient, RawMaterial } from "@prisma/client";
 import { isEmpty } from "class-validator";
-import {
-  CreateRawMaterialDto,
-  UpdateRawMaterialDto,
-} from "src/dtos/raw_materials.dto";
 import { HttpException } from "src/exceptions/httpExceptions";
 
 export class RawMaterialService {
@@ -31,7 +27,7 @@ export class RawMaterialService {
   }
 
   public async createRawmaterial(
-    rawMaterialdata: CreateRawMaterialDto
+    rawMaterialdata: Prisma.RawMaterialCreateInput
   ): Promise<RawMaterial> {
     if (isEmpty(rawMaterialdata))
       throw new HttpException(400, "raw Material data is empty");
@@ -46,44 +42,50 @@ export class RawMaterialService {
   public async findRawMaterialById(id: string): Promise<RawMaterial> {
     if (isEmpty(id)) throw new HttpException(400, "Id is empty");
 
-    const findRawMaterial: RawMaterial | null = await this.rawMaterials.findUnique({
-      where: { id },
-    });
-    if (!findRawMaterial) throw new HttpException(409, "RawMaterial doesn't exist");
+    const findRawMaterial: RawMaterial | null =
+      await this.rawMaterials.findUnique({
+        where: { id },
+      });
+    if (!findRawMaterial)
+      throw new HttpException(409, "RawMaterial doesn't exist");
 
     return findRawMaterial;
   }
 
   public async updateRawMaterial(
-    rawMaterialdata: UpdateRawMaterialDto
+    rawMaterialdata: Prisma.RawMaterialUpdateInput
   ): Promise<RawMaterial> {
     if (isEmpty(rawMaterialdata))
       throw new HttpException(400, "RawMaterialData is empty");
 
     const findRawMaterial: RawMaterial | null =
       await this.rawMaterials.findUnique({
-        where: { id: rawMaterialdata.id },
+        where: { id: rawMaterialdata.id as string },
       });
     if (!findRawMaterial)
       throw new HttpException(409, "Raw Material doesn't exist");
 
     const updateRawMaterialData = await this.rawMaterials.update({
-      where: { id: rawMaterialdata.id },
+      where: { id: rawMaterialdata.id as string },
       data: rawMaterialdata,
     });
     return updateRawMaterialData;
   }
 
   public async deleteRawMaterialById(id: string): Promise<RawMaterial> {
-    if (isEmpty(id)) throw new HttpException(400, "RawMaterial doesn't existId");
+    if (isEmpty(id))
+      throw new HttpException(400, "RawMaterial doesn't existId");
 
     const findRawMaterial: RawMaterial | null =
       await this.rawMaterials.findUnique({
         where: { id },
       });
-    if (!findRawMaterial) throw new HttpException(409, "RawMaterial doesn't exist");
+    if (!findRawMaterial)
+      throw new HttpException(409, "RawMaterial doesn't exist");
 
-    const deleteRawMaterialData = await this.rawMaterials.delete({ where: { id } });
+    const deleteRawMaterialData = await this.rawMaterials.delete({
+      where: { id },
+    });
     return deleteRawMaterialData;
   }
 }

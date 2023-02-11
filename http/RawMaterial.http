@@ -8,29 +8,29 @@ POST {{baseURLRawMaterial}}/
 Content-Type: application/json
 
 {
-    "name": "Diamond",
-    "type": "acrylic",
-	"quantity": 500
+    "name": "Square",
+    "type": "metal",
+	"quantity": 1000
 }
 
 ###
 # Get all raw material
-GET {{baseURLRawMaterial}}?searchTerm=metal
+GET {{baseURLRawMaterial}}?searchTerm=
 
 ###
 # Get raw material by ID
-GET {{baseURLRawMaterial}}/e51e9ab4-1f58-4a36-96f2-5b4e1263d068
+GET {{baseURLRawMaterial}}/1917f9fd-5100-49cf-9d0c-87cca4aa42a8
 
 ###
 # Delete raw material by ID
-DELETE  {{baseURLRawMaterial}}/e51e9ab4-1f58-4a36-96f2-5b4e1263d068
+DELETE  {{baseURLRawMaterial}}/1917f9fd-5100-49cf-9d0c-87cca4aa42a8
 
 ###
 # Update raw material
-PUT {{baseURLRawMaterial}}/e51e9ab4-1f58-4a36-96f2-5b4e1263d068
+PUT {{baseURLRawMaterial}}/1917f9fd-5100-49cf-9d0c-87cca4aa42a8
 Content-Type: application/json
 
 {   
-    "id": "e51e9ab4-1f58-4a36-96f2-5b4e1263d068",
-	"quantity": 350
+    "id": "1917f9fd-5100-49cf-9d0c-87cca4aa42a8",
+	"quantity": 1050
 }
