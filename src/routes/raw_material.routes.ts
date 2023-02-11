@@ -14,14 +14,22 @@ class RawMaterialRoutes implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.post(
-      `${this.path}`,
-      this.rawMaterialontroller.createRawMaterial
-    );
-    this.router.put(
-      `${this.path}`,
-      this.rawMaterialontroller.updateRawMaterial
-    );
+    const {
+      createRawMaterial,
+      deleteRawMaterialById,
+      findAllRawMaterials,
+      findRawMaterialById,
+      updateRawMaterial,
+    } = this.rawMaterialontroller;
+    this.router
+      .route(this.path)
+      .get(findAllRawMaterials)
+      .post(createRawMaterial);
+    this.router
+      .route(this.path + ":id")
+      .get(findRawMaterialById)
+      .delete(deleteRawMaterialById)
+      .put(updateRawMaterial);
   }
 }
 

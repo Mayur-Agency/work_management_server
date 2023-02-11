@@ -12,14 +12,21 @@ export class RawMaterialService {
   public async findAllRawMaterials(
     searchTerm: string = ""
   ): Promise<RawMaterial[]> {
+    console.log(searchTerm);
     const allRawMaterials: RawMaterial[] = await this.rawMaterials.findMany({
-      include: { Assembly: false },
       where: {
         OR: [
-          { name: { contains: searchTerm }, type: { contains: searchTerm } },
+          {
+            name: { contains: searchTerm, mode: "insensitive" },
+          },
+          {
+            type: { contains: searchTerm, mode: "insensitive" },
+          },
         ],
       },
+      include: { Assembly: false },
     });
+    console.log(allRawMaterials);
     return allRawMaterials;
   }
 
