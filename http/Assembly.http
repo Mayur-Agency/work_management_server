@@ -1,0 +1,40 @@
+# baseURL
+@baseURL = http://localhost:3000
+@baseURLAssembly = http://localhost:3000/api/v1/assembly
+
+###
+# Create new raw material
+POST {{baseURLAssembly}}/
+Content-Type: application/json
+
+{
+    "worker_id": {
+        "connect": {"id": "054d43d8-6c59-4700-971a-8a72ed7dd04b"}
+    },
+    "raw_material": {
+        "connect": {"id": "4f7f0833-3d89-476f-8aa6-81bcc2f8b469"}
+    },
+    "quantity": 50
+}
+
+###
+# Get all assemblies
+GET {{baseURLAssembly}}?searchTerm=kan
+
+###
+# Get workers by ID
+GET {{baseURLAssembly}}/6d579026-cae8-4d54-b374-1b2b67a66f61
+
+###
+# Delete raw material by ID
+DELETE  {{baseURLAssembly}}/6d579026-cae8-4d54-b374-1b2b67a66f61
+
+###
+# Update raw material
+PUT {{baseURLAssembly}}/6d579026-cae8-4d54-b374-1b2b67a66f61
+Content-Type: application/json
+
+{   
+    "id": "6d579026-cae8-4d54-b374-1b2b67a66f61",
+	"completed": true
+}
