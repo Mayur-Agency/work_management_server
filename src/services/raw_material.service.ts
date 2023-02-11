@@ -46,19 +46,19 @@ export class RawMaterialService {
   public async findRawMaterialById(id: string): Promise<RawMaterial> {
     if (isEmpty(id)) throw new HttpException(400, "Id is empty");
 
-    const findUser: RawMaterial | null = await this.rawMaterials.findUnique({
+    const findRawMaterial: RawMaterial | null = await this.rawMaterials.findUnique({
       where: { id },
     });
-    if (!findUser) throw new HttpException(409, "RawMaterial doesn't exist");
+    if (!findRawMaterial) throw new HttpException(409, "RawMaterial doesn't exist");
 
-    return findUser;
+    return findRawMaterial;
   }
 
   public async updateRawMaterial(
     rawMaterialdata: UpdateRawMaterialDto
   ): Promise<RawMaterial> {
     if (isEmpty(rawMaterialdata))
-      throw new HttpException(400, "userData is empty");
+      throw new HttpException(400, "RawMaterialData is empty");
 
     const findRawMaterial: RawMaterial | null =
       await this.rawMaterials.findUnique({
@@ -67,23 +67,23 @@ export class RawMaterialService {
     if (!findRawMaterial)
       throw new HttpException(409, "Raw Material doesn't exist");
 
-    const updateUserData = await this.rawMaterials.update({
+    const updateRawMaterialData = await this.rawMaterials.update({
       where: { id: rawMaterialdata.id },
       data: rawMaterialdata,
     });
-    return updateUserData;
+    return updateRawMaterialData;
   }
 
   public async deleteRawMaterialById(id: string): Promise<RawMaterial> {
-    if (isEmpty(id)) throw new HttpException(400, "User doesn't existId");
+    if (isEmpty(id)) throw new HttpException(400, "RawMaterial doesn't existId");
 
     const findRawMaterial: RawMaterial | null =
       await this.rawMaterials.findUnique({
         where: { id },
       });
-    if (!findRawMaterial) throw new HttpException(409, "User doesn't exist");
+    if (!findRawMaterial) throw new HttpException(409, "RawMaterial doesn't exist");
 
-    const deleteUserData = await this.rawMaterials.delete({ where: { id } });
-    return deleteUserData;
+    const deleteRawMaterialData = await this.rawMaterials.delete({ where: { id } });
+    return deleteRawMaterialData;
   }
 }

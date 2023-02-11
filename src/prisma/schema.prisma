@@ -1,16 +1,17 @@
 generator client {
-  provider = "prisma-client-js"
-  previewFeatures = ["fullTextSearch","fullTextIndex"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 model Worker {
   id       String     @id @unique @default(uuid())
   name     String
-  phone    Int
+  phone    String     @unique
   address  String?
   Assembly Assembly[]
 }
