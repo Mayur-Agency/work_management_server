@@ -20,7 +20,6 @@ export class RawMaterialService {
           },
         ],
       },
-      include: { Assembly: false },
     });
     console.log(allRawMaterials);
     return allRawMaterials;

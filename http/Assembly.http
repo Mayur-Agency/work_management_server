@@ -3,27 +3,22 @@
 @baseURLAssembly = http://localhost:3000/api/v1/assembly
 
 ###
-# Create new raw material
+# Create new assembly
 POST {{baseURLAssembly}}/
 Content-Type: application/json
 
 {
-    "worker_id": {
-        "connect": {"id": "054d43d8-6c59-4700-971a-8a72ed7dd04b"}
-    },
-    "raw_material": {
-        "connect": {"id": "4f7f0833-3d89-476f-8aa6-81bcc2f8b469"}
-    },
-    "quantity": 50
+    "workerId": "4da2f516-9055-4b56-8ac8-3cabf78a3e99",
+    "rawMaterialsArr": [{"id": "9ea3bbf2-8b0d-41a7-bcd8-0b5903f4b7de", "quantity": 50}]
 }
 
 ###
 # Get all assemblies
-GET {{baseURLAssembly}}?searchTerm=kan
+GET {{baseURLAssembly}}
 
 ###
-# Get workers by ID
-GET {{baseURLAssembly}}/6d579026-cae8-4d54-b374-1b2b67a66f61
+# Get assembly by ID
+GET {{baseURLAssembly}}/e57f4cc3-a72e-4062-be07-c004e3766c3d
 
 ###
 # Delete raw material by ID

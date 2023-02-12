@@ -8,8 +8,8 @@ POST {{baseURLRawMaterial}}/
 Content-Type: application/json
 
 {
-    "name": "Square",
-    "type": "metal",
+    "name": "cone",
+    "type": "white",
 	"quantity": 1000
 }
 
@@ -19,18 +19,18 @@ GET {{baseURLRawMaterial}}?searchTerm=
 
 ###
 # Get raw material by ID
-GET {{baseURLRawMaterial}}/1917f9fd-5100-49cf-9d0c-87cca4aa42a8
+GET {{baseURLRawMaterial}}/af2faff4-bd33-4624-a253-7dcefaa27902
 
 ###
 # Delete raw material by ID
-DELETE  {{baseURLRawMaterial}}/1917f9fd-5100-49cf-9d0c-87cca4aa42a8
+DELETE  {{baseURLRawMaterial}}/af2faff4-bd33-4624-a253-7dcefaa27902
 
 ###
 # Update raw material
-PUT {{baseURLRawMaterial}}/1917f9fd-5100-49cf-9d0c-87cca4aa42a8
+PUT {{baseURLRawMaterial}}/29cd7b6d-5752-4f57-bdea-f5024c172b3c
 Content-Type: application/json
 
 {   
-    "id": "1917f9fd-5100-49cf-9d0c-87cca4aa42a8",
-	"quantity": 1050
+    "id": "29cd7b6d-5752-4f57-bdea-f5024c172b3c",
+	"type": "white"
 }

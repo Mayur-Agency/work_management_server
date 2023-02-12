@@ -1,5 +1,6 @@
 import { Assembly, Prisma } from "@prisma/client";
 import { HttpException } from "src/exceptions/httpExceptions";
+import { ICreateAssembly } from "src/interfaces/assembly.interface";
 import { asyncHandler } from "src/middlewares/async";
 
 import { AssemblyService } from "../services/assembly.service";
@@ -9,9 +10,9 @@ export class AssemblyController {
 
   public createAssembly = asyncHandler(async (req, res, next) => {
     try {
-      const assemblyData: Prisma.AssemblyCreateInput = req.body;
+      const assemblyData: ICreateAssembly = req.body;
       const createAssemblyData: Assembly =
-        await this.assemblyService.createAssembly(assemblyData);
+        await this.assemblyService.createRawAssembly(assemblyData);
       res.status(201).json({ success: true, data: createAssemblyData });
     } catch (error) {
       next(error);

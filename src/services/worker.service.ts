@@ -31,7 +31,7 @@ export class WorkerService {
       where: {
         name: { contains: searchTerm, mode: "insensitive" },
       },
-      include: { Assembly: false },
+      // include: { Assembly: false },
     });
     
     return allWorkers;

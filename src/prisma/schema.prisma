@@ -9,29 +9,37 @@ datasource db {
 }
 
 model Worker {
-  id       String     @id @unique @default(uuid())
-  name     String
-  phone    String     @unique
-  address  String?
-  Assembly Assembly[]
-}
-
-model Assembly {
-  id             String        @id @unique @default(uuid())
-  worker_id      Worker        @relation(fields: [workerId], references: [id])
-  date_assigned  DateTime      @updatedAt
-  date_completed DateTime?     @updatedAt
-  completed      Boolean?
-  raw_material   RawMaterial[]
-  workerId       String
+  id         String     @id @default(uuid())
+  name       String     @unique
+  phone      String
+  address    String
+  assemblies Assembly[]
 }
 
 model RawMaterial {
-  id         String    @id @unique @default(uuid())
-  name       String
-  type       String
-  quantity   Int
-  date_added DateTime  @default(now())
-  Assembly   Assembly? @relation(fields: [assemblyId], references: [id])
-  assemblyId String?
+  id                   String                @id @default(uuid())
+  name                 String                @unique
+  type                 String
+  quantity             Int
+  dateAdded            DateTime              @default(now())
+  assemblyRawMaterials RawMaterialAssembly[]
+}
+
+model Assembly {
+  id                    String                @id @default(uuid())
+  dateAssigned          DateTime
+  dateCompleted         DateTime?
+  completed             Boolean
+  workerId              String
+  worker                Worker                @relation(fields: [workerId], references: [id])
+  rawMaterialAssemblies RawMaterialAssembly[]
+}
+
+model RawMaterialAssembly {
+  id            String      @id @default(uuid())
+  assemblyId    String
+  rawMaterialId String
+  quantity      Int
+  assembly      Assembly    @relation(fields: [assemblyId], references: [id])
+  rawMaterial   RawMaterial @relation(fields: [rawMaterialId], references: [id])
 }

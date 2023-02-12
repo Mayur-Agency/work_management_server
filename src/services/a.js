@@ -83,14 +83,14 @@ let p = {
   ],
 };
 
-let o = {
-  id: "string",
-  worker_id: {
-    type: "string",
-    ref: "Worker",
-  },
-  date_assigned: "2022-06-07T12:30:00.000Z",
-  date_completed: "2022-06-08T12:30:00.000Z",
-  completed: true,
-  raw_materials: [{ id: "rawmaterial1", quantity: 10 }],
-};
+// const createArr = [{ quantity: 10, rawMaterial: { connect: { id: 0 } } }];
+let a = [
+  { id: 1, quantity: 10 },
+  { id: 2, quantity: 5 },
+];
+const createArr = a.map((material) => {
+  return {
+    quantity: material.quantity,
+    rawMaterial: { connect: { id: material.id } },
+  };
+});
