@@ -87,24 +87,16 @@ export class AssemblyService {
     }
     return assembly;
   }
-  public createAssembly(
-    assemblyData: Prisma.AssemblyCreateInput
-  ): Promise<Assembly> {
-    console.log(assemblyData);
-    if (isEmpty(assemblyData)) {
-      throw new HttpException(400, "raw Material data is empty");
-    }
-    const createAssemblyData: Promise<Assembly> = this.assemblies.create({
-      data: assemblyData,
-    });
-    return createAssemblyData;
-  }
   public async findAssemblyById(assemblyId: string): Promise<Assembly> {
     if (isEmpty(assemblyId))
       throw new HttpException(400, "AssemblyId is empty");
 
     const findAssembly: Assembly | null = await this.assemblies.findUnique({
       where: { id: assemblyId },
+      include: {
+        worker: true,
+        rawMaterialAssemblies: { include: { rawMaterial: true } },
+      },
     });
     if (!findAssembly) throw new HttpException(409, "Assembly doesn't exist");
 
@@ -122,7 +114,9 @@ export class AssemblyService {
   ): Promise<Assembly> {
     if (isEmpty(assemblydata))
       throw new HttpException(400, "AssemblyData is empty");
-
+    if (assemblydata["completed"] == true) {
+      assemblydata.dateCompleted = new Date();
+    }
     const findAssembly: Assembly | null = await this.assemblies.findUnique({
       where: { id: assemblydata.id as string },
     });

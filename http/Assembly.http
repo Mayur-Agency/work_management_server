@@ -18,18 +18,18 @@ GET {{baseURLAssembly}}
 
 ###
 # Get assembly by ID
-GET {{baseURLAssembly}}/e57f4cc3-a72e-4062-be07-c004e3766c3d
+GET {{baseURLAssembly}}/fac933ec-df6b-40b6-82d1-9e4fdb47b6f8
 
 ###
-# Delete raw material by ID
-DELETE  {{baseURLAssembly}}/6d579026-cae8-4d54-b374-1b2b67a66f61
+# Delete assembly by ID
+DELETE  {{baseURLAssembly}}/fac933ec-df6b-40b6-82d1-9e4fdb47b6f8
 
 ###
-# Update raw material
-PUT {{baseURLAssembly}}/6d579026-cae8-4d54-b374-1b2b67a66f61
+# Update assembly
+PUT {{baseURLAssembly}}/fac933ec-df6b-40b6-82d1-9e4fdb47b6f8
 Content-Type: application/json
 
 {   
-    "id": "6d579026-cae8-4d54-b374-1b2b67a66f61",
+    "id": "fac933ec-df6b-40b6-82d1-9e4fdb47b6f8",
 	"completed": true
 }
