@@ -27,17 +27,9 @@ export class WorkerService {
     };
 
     if (includeAssembly) {
-      if (!completed) {
-        query.include = {
-          ...query.include,
-          assemblies: {
-            where: { completed: false },
-          },
-        };
-      } else {
-      query.include = { assemblies: true };
-      }
+      query.include = { assemblies: { where: { completed } } };
     }
+    console.log(JSON.stringify(query))
     const worker = await this.workers.findUnique(query);
 
     if (!worker) {

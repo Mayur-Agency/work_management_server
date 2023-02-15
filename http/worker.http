@@ -19,7 +19,7 @@ GET {{baseURLWorker}}?searchTerm=kan
 
 ###
 # Get workers by ID
-GET {{baseURLWorker}}/4da2f516-9055-4b56-8ac8-3cabf78a3e99?assemblies=true&completed=true
+GET {{baseURLWorker}}/4da2f516-9055-4b56-8ac8-3cabf78a3e99?assemblies=true&completedAssemblies=true
 
 ###
 # Delete raw material by ID
