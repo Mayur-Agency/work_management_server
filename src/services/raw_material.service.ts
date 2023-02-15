@@ -8,7 +8,7 @@ export class RawMaterialService {
   public async findAllRawMaterials(
     searchTerm: string = ""
   ): Promise<RawMaterial[]> {
-    console.log(searchTerm);
+    (searchTerm);
     const allRawMaterials: RawMaterial[] = await this.rawMaterials.findMany({
       where: {
         OR: [
@@ -21,7 +21,6 @@ export class RawMaterialService {
         ],
       },
     });
-    console.log(allRawMaterials);
     return allRawMaterials;
   }
 

@@ -2,7 +2,7 @@ import { PrismaClient, Assembly, Prisma } from "@prisma/client";
 import { isEmpty } from "class-validator";
 // import { isEmpty } from "class-validator";
 import { HttpException } from "src/exceptions/httpExceptions";
-import { ICreateAssembly } from "src/interfaces/assembly.interface";
+import { ICreateAssembly } from "src/interfaces/service.interface";
 
 export class AssemblyService {
   public assemblies = new PrismaClient().assembly;

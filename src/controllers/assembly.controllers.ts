@@ -1,6 +1,6 @@
 import { Assembly, Prisma } from "@prisma/client";
 import { HttpException } from "src/exceptions/httpExceptions";
-import { ICreateAssembly } from "src/interfaces/assembly.interface";
+import { ICreateAssembly } from "src/interfaces/service.interface";
 import { asyncHandler } from "src/middlewares/async";
 
 import { AssemblyService } from "../services/assembly.service";
