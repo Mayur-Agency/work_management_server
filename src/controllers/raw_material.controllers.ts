@@ -20,6 +20,18 @@ export class RawMaterialController {
       next(error);
     }
   });
+  public groupRawMaterialByType = asyncHandler(async (_req, res, next) => {
+    try {
+      const rawMaterialData =
+        await this.rawMaterialService.groupRawMaterialByType();
+      res.status(200).json({
+        success: true,
+        data: rawMaterialData,
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
   public findAllRawMaterials = asyncHandler(async (req, res, next) => {
     try {
       const { searchTerm } = req.query;
@@ -28,13 +40,11 @@ export class RawMaterialController {
       }
       const rawMaterialData: RawMaterial[] =
         await this.rawMaterialService.findAllRawMaterials(searchTerm as string);
-      res
-        .status(200)
-        .json({
-          success: true,
-          data: rawMaterialData,
-          count: rawMaterialData.length,
-        });
+      res.status(200).json({
+        success: true,
+        data: rawMaterialData,
+        count: rawMaterialData.length,
+      });
     } catch (error) {
       next(error);
     }

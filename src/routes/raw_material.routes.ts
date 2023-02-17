@@ -20,11 +20,13 @@ class RawMaterialRoutes implements Routes {
       findAllRawMaterials,
       findRawMaterialById,
       updateRawMaterial,
+      groupRawMaterialByType
     } = this.rawMaterialontroller;
     this.router
       .route(this.path)
       .get(findAllRawMaterials)
       .post(createRawMaterial);
+      this.router.get(this.path + 'group/type',groupRawMaterialByType)
     this.router
       .route(this.path + ":id")
       .get(findRawMaterialById)

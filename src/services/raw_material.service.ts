@@ -4,7 +4,7 @@ import { HttpException } from "src/exceptions/httpExceptions";
 import PrismaService from "src/prisma/PrismaService";
 
 export class RawMaterialService {
-  public rawMaterials = PrismaService.getPrismaClient().rawMaterial
+  public rawMaterials = PrismaService.getPrismaClient().rawMaterial;
 
   public async findAllRawMaterials(
     searchTerm: string = ""
@@ -44,6 +44,18 @@ export class RawMaterialService {
       await this.rawMaterials.findUnique({
         where: { id },
       });
+    if (!findRawMaterial)
+      throw new HttpException(409, "RawMaterial doesn't exist");
+
+    return findRawMaterial;
+  }
+
+  public async groupRawMaterialByType() {
+    const findRawMaterial = await this.rawMaterials.groupBy({
+      by: ["type"],
+      _count: { name: true },
+      _sum: { quantity: true },
+    });
     if (!findRawMaterial)
       throw new HttpException(409, "RawMaterial doesn't exist");
 

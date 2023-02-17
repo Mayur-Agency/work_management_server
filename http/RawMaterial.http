@@ -18,6 +18,10 @@ Content-Type: application/json
 GET {{baseURLRawMaterial}}?searchTerm=
 
 ###
+# Get all raw material grouped by type
+GET {{baseURLRawMaterial}}/group/type
+
+###
 # Get raw material by ID
 GET {{baseURLRawMaterial}}/af2faff4-bd33-4624-a253-7dcefaa27902
 
