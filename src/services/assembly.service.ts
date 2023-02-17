@@ -1,13 +1,14 @@
-import { PrismaClient, Assembly, Prisma } from "@prisma/client";
+import { Assembly, Prisma } from "@prisma/client";
 import { isEmpty } from "class-validator";
-// import { isEmpty } from "class-validator";
 import { HttpException } from "src/exceptions/httpExceptions";
-import { ICreateAssembly } from "src/interfaces/service.interface";
+import {
+  AssemblyQueryParams,
+  ICreateAssembly,
+} from "src/interfaces/service.interface";
+import PrismaService from "src/prisma/PrismaService";
 
 export class AssemblyService {
-  public assemblies = new PrismaClient().assembly;
-  public assemblyRawMaterials = new PrismaClient().rawMaterialAssembly;
-  public rawMaterials = new PrismaClient().rawMaterial;
+  public prisma = PrismaService.getPrismaClient();
   // public async createAssembly({ rawMaterialsArr, workerId }: ICreateAssembly) {
   //   // const createArr = rawMaterialsArr.map((material) => {
   //   //   return {
@@ -15,7 +16,7 @@ export class AssemblyService {
   //   //     rawMaterial: { connect: { id: material.id } },
   //   //   };
   //   // });
-  //   const assembly = await this.assemblies.create({
+  //   const assembly = await this.prisma.assembly.create({
   //     data: {
   //       worker_id: { connect: { id: workerId } },
   //       AssemblyRawMaterial: {
@@ -55,7 +56,7 @@ export class AssemblyService {
    */
   public async createRawAssembly(assemblyData: ICreateAssembly) {
     const dateAssigned = new Date();
-    const assembly = await this.assemblies.create({
+    const assembly = await this.prisma.assembly.create({
       data: {
         dateAssigned,
         dateCompleted: dateAssigned,
@@ -65,7 +66,7 @@ export class AssemblyService {
     });
 
     for (const rawMaterial of assemblyData.rawMaterialsArr) {
-      await this.assemblyRawMaterials.create({
+      await this.prisma.rawMaterialAssembly.create({
         data: {
           assembly: {
             connect: {
@@ -80,7 +81,7 @@ export class AssemblyService {
           quantity: rawMaterial.quantity,
         },
       });
-      await this.rawMaterials.update({
+      await this.prisma.rawMaterial.update({
         where: { id: rawMaterial.id },
         data: { quantity: { decrement: rawMaterial.quantity } },
       });
@@ -91,22 +92,60 @@ export class AssemblyService {
     if (isEmpty(assemblyId))
       throw new HttpException(400, "AssemblyId is empty");
 
-    const findAssembly: Assembly | null = await this.assemblies.findUnique({
-      where: { id: assemblyId },
-      include: {
-        worker: true,
-        rawMaterialAssemblies: { include: { rawMaterial: true } },
-      },
-    });
+    const findAssembly: Assembly | null = await this.prisma.assembly.findUnique(
+      {
+        where: { id: assemblyId },
+        include: {
+          worker: true,
+          rawMaterialAssemblies: { include: { rawMaterial: true } },
+        },
+      }
+    );
     if (!findAssembly) throw new HttpException(409, "Assembly doesn't exist");
 
     return findAssembly;
   }
 
-  public async findAllAssemblies(): Promise<Assembly[]> {
-    const allAssemblies: Assembly[] = await this.assemblies.findMany();
-
-    return allAssemblies;
+  /**
+   * getAllAssembliesWithFilters
+   */
+  public async getAllAssembliesWithFilters(params: AssemblyQueryParams) {
+    const query: Prisma.AssemblyFindManyArgs = {};
+    if (params.dateAssigned) {
+      query.where = {
+        ...query.where,
+        dateAssigned: { gte: params.dateAssigned },
+      };
+    }
+    if (params.dateCompleted) {
+      query.where = {
+        ...query.where,
+        dateCompleted: { lte: params.dateCompleted },
+      };
+    }
+    if (params.completed !== undefined) {
+      query.where = { ...query.where, completed: params.completed };
+    }
+    if (params.workerId) {
+      query.where = { ...query.where, workerId: params.workerId };
+    }
+    if (params.rawMaterial) {
+      query.where = {
+        ...query.where,
+        rawMaterialAssemblies: {
+          some: {
+            rawMaterial: {
+              OR: [
+                { name: { contains: params.rawMaterial, mode: "insensitive" } },
+                { type: { contains: params.rawMaterial, mode: "insensitive" } },
+              ],
+            },
+          },
+        },
+      };
+    }
+    const assemblies = await this.prisma.assembly.findMany(query);
+    return assemblies;
   }
 
   public async updateAssembly(
@@ -117,13 +156,15 @@ export class AssemblyService {
     if (assemblydata["completed"] == true) {
       assemblydata.dateCompleted = new Date();
     }
-    const findAssembly: Assembly | null = await this.assemblies.findUnique({
-      where: { id: assemblydata.id as string },
-    });
+    const findAssembly: Assembly | null = await this.prisma.assembly.findUnique(
+      {
+        where: { id: assemblydata.id as string },
+      }
+    );
     if (!findAssembly)
       throw new HttpException(409, "Raw Material doesn't exist");
 
-    const updateAssemblyData = await this.assemblies.update({
+    const updateAssemblyData = await this.prisma.assembly.update({
       where: { id: assemblydata.id as string },
       data: assemblydata,
     });
@@ -133,12 +174,16 @@ export class AssemblyService {
   public async deleteAssemblyById(id: string): Promise<Assembly> {
     if (isEmpty(id)) throw new HttpException(400, "Assembly doesn't existId");
 
-    const findAssembly: Assembly | null = await this.assemblies.findUnique({
-      where: { id },
-    });
+    const findAssembly: Assembly | null = await this.prisma.assembly.findUnique(
+      {
+        where: { id },
+      }
+    );
     if (!findAssembly) throw new HttpException(409, "Assembly doesn't exist");
 
-    const deleteAssemblyData = await this.assemblies.delete({ where: { id } });
+    const deleteAssemblyData = await this.prisma.assembly.delete({
+      where: { id },
+    });
     return deleteAssemblyData;
   }
 }

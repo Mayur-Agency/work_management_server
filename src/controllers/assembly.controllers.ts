@@ -1,8 +1,7 @@
 import { Assembly, Prisma } from "@prisma/client";
-import { HttpException } from "src/exceptions/httpExceptions";
 import { ICreateAssembly } from "src/interfaces/service.interface";
 import { asyncHandler } from "src/middlewares/async";
-
+// import qs from 'qs'
 import { AssemblyService } from "../services/assembly.service";
 
 export class AssemblyController {
@@ -18,14 +17,14 @@ export class AssemblyController {
       next(error);
     }
   });
-  public findAllAssemblies = asyncHandler(async (req, res, next) => {
+  /**
+   * getAllAssembliesWithFilters
+   */
+  public getAllAssembliesWithFilters = asyncHandler(async (req, res, next) => {
     try {
-      const { searchTerm } = req.query;
-      if (searchTerm && typeof searchTerm !== "string") {
-        return next(new HttpException(400, `SearchTerm has to be a string`));
-      }
-      const assemblyData: Assembly[] =
-        await this.assemblyService.findAllAssemblies();
+      const query = req.query;
+      const assemblyData =
+        await this.assemblyService.getAllAssembliesWithFilters(query);
       res.status(200).json({
         success: true,
         data: assemblyData,

@@ -1,10 +1,11 @@
-import { PrismaClient, Worker, Prisma } from "@prisma/client";
+import { Worker, Prisma } from "@prisma/client";
 import { isEmpty } from "class-validator";
 import { HttpException } from "src/exceptions/httpExceptions";
 import { FindWorkerByIdArgs } from "src/interfaces/service.interface";
+import PrismaService from "src/prisma/PrismaService";
 
 export class WorkerService {
-  public workers = new PrismaClient().worker;
+  public workers = PrismaService.getPrismaClient().worker;
   public createWorker(workerData: Prisma.WorkerCreateInput): Promise<Worker> {
     if (isEmpty(workerData)) {
       throw new HttpException(400, "raw Material data is empty");
@@ -29,7 +30,6 @@ export class WorkerService {
     if (includeAssembly) {
       query.include = { assemblies: { where: { completed } } };
     }
-    console.log(JSON.stringify(query))
     const worker = await this.workers.findUnique(query);
 
     if (!worker) {

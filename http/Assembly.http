@@ -21,6 +21,10 @@ GET {{baseURLAssembly}}
 GET {{baseURLAssembly}}/fac933ec-df6b-40b6-82d1-9e4fdb47b6f8
 
 ###
+# Get assembly by ID LTE
+GET {{baseURLAssembly}}/ohh?rawMaterial=conrn
+
+###
 # Delete assembly by ID
 DELETE  {{baseURLAssembly}}/fac933ec-df6b-40b6-82d1-9e4fdb47b6f8
 
