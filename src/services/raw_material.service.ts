@@ -1,14 +1,14 @@
-import { Prisma, PrismaClient, RawMaterial } from "@prisma/client";
+import { Prisma, RawMaterial } from "@prisma/client";
 import { isEmpty } from "class-validator";
 import { HttpException } from "src/exceptions/httpExceptions";
+import PrismaService from "src/prisma/PrismaService";
 
 export class RawMaterialService {
-  public rawMaterials = new PrismaClient().rawMaterial;
+  public rawMaterials = PrismaService.getPrismaClient().rawMaterial
 
   public async findAllRawMaterials(
     searchTerm: string = ""
   ): Promise<RawMaterial[]> {
-    console.log(searchTerm);
     const allRawMaterials: RawMaterial[] = await this.rawMaterials.findMany({
       where: {
         OR: [
@@ -21,7 +21,6 @@ export class RawMaterialService {
         ],
       },
     });
-    console.log(allRawMaterials);
     return allRawMaterials;
   }
 

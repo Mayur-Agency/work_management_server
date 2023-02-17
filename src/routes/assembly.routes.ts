@@ -5,7 +5,7 @@ import { AssemblyController } from "src/controllers/assembly.controllers";
 class AssemblyRoutes implements Routes {
   public path = "/api/v1/assembly/";
   public router = Router();
-  public workerontroller = new AssemblyController();
+  public assemblyontroller = new AssemblyController();
 
   constructor() {
     this.initializeRoutes();
@@ -15,11 +15,14 @@ class AssemblyRoutes implements Routes {
     const {
       createAssembly,
       deleteAssemblyById,
-      findAllAssemblies,
       findAssemblyById,
       updateAssembly,
-    } = this.workerontroller;
-    this.router.route(this.path).get(findAllAssemblies).post(createAssembly);
+      getAllAssembliesWithFilters,
+    } = this.assemblyontroller;
+    this.router
+      .route(this.path)
+      .get(getAllAssembliesWithFilters)
+      .post(createAssembly);
     this.router
       .route(this.path + ":id")
       .get(findAssemblyById)

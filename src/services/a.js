@@ -1,3 +1,5 @@
+let lite =
+  "http://localhost:3000/assemblies?workerId=worker-1&completed=true&rawMaterialType=electronics&sortBy=date_completed&sortOrder=desc&limit=10&offset=0";
 // const uri =
 //   "assemblies?completed=true&startdate=2022-01-01&enddate=2022-12-31&worker_id=054d43d8-6c59-4700-971a-8a72ed7dd04b";
 // const queries = {
