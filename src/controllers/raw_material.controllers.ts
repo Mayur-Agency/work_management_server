@@ -26,6 +26,7 @@ export class RawMaterialController {
         await this.rawMaterialService.groupRawMaterialByType();
       res.status(200).json({
         success: true,
+        count: rawMaterialData.length,
         data: rawMaterialData,
       });
     } catch (error) {
