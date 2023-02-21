@@ -1,9 +1,9 @@
 import { Assembly, Prisma } from "@prisma/client";
 import { isEmpty } from "class-validator";
+import { ICreateAssembly } from "src/dtos/assembly.dto";
 import { HttpException } from "src/exceptions/httpExceptions";
 import {
   AssemblyQueryParams,
-  ICreateAssembly,
 } from "src/interfaces/service.interface";
 import PrismaService from "src/prisma/PrismaService";
 
