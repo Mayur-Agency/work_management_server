@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { Routes } from "../interfaces/routes.interface";
+import { Routes } from "src/components/core/route.interface";;
 // import validationMiddleware from "../middlewares/validation.middleware";
-import { RawMaterialController } from "src/controllers/raw_material.controllers";
-// import { CreateRawMaterialDto } from "src/dtos/raw_materials.dto";
+import { RawMaterialController } from "src/components/rawMaterial/raw_material.controllers";
+// import { CreateRawMaterialDto } from "src/dtos/raw_materials.interface";
 
 class RawMaterialRoutes implements Routes {
   public path = "/api/v1/raw/";

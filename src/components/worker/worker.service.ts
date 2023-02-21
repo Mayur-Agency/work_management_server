@@ -1,8 +1,9 @@
 import { Worker, Prisma } from "@prisma/client";
-import { isEmpty } from "class-validator";
+
 import { HttpException } from "src/exceptions/httpExceptions";
-import { FindWorkerByIdArgs } from "src/interfaces/service.interface";
+import { FindWorkerByIdArgs } from "./workers.interface";
 import PrismaService from "src/prisma/PrismaService";
+import { isEmpty } from "src/utils/helper.functions";
 
 export class WorkerService {
   public workers = PrismaService.getPrismaClient().worker;

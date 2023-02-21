@@ -1,7 +1,7 @@
 import { Prisma, RawMaterial } from "@prisma/client";
-import { isEmpty } from "class-validator";
 import { HttpException } from "src/exceptions/httpExceptions";
 import PrismaService from "src/prisma/PrismaService";
+import { isEmpty } from "src/utils/helper.functions";
 
 export class RawMaterialService {
   public rawMaterials = PrismaService.getPrismaClient().rawMaterial;

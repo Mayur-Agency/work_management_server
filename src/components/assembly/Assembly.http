@@ -1,6 +1,6 @@
 # baseURL
-@baseURL = http://localhost:3000
-@baseURLAssembly = http://localhost:3000/api/v1/assembly
+@baseURL = http://localhost:5000
+@baseURLAssembly = http://localhost:5000/api/v1/assembly
 
 ###
 # Create new assembly
@@ -19,10 +19,6 @@ GET {{baseURLAssembly}}
 ###
 # Get assembly by ID
 GET {{baseURLAssembly}}/fac933ec-df6b-40b6-82d1-9e4fdb47b6f8
-
-###
-# Get assembly by ID LTE
-GET {{baseURLAssembly}}/ohh?rawMaterial=conrn
 
 ###
 # Delete assembly by ID

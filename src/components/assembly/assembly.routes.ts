@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { Routes } from "../interfaces/routes.interface";
-import { AssemblyController } from "src/controllers/assembly.controllers";
+import { Routes } from "src/components/core/route.interface";import { AssemblyController } from "./assembly.controllers";
+;
 
 class AssemblyRoutes implements Routes {
   public path = "/api/v1/assembly/";

@@ -1,13 +1,7 @@
-export interface ICreateAssembly {
+export type ICreateAssembly = {
   workerId: string;
   rawMaterialsArr: Array<{ id: string; quantity: number }>;
-}
-
-export interface FindWorkerByIdArgs {
-  workerId: string;
-  includeAssembly?: boolean;
-  completed?: boolean;
-}
+};
 
 export interface AssemblyQueryParams {
   dateAssigned?: Date;

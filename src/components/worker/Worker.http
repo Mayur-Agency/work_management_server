@@ -1,6 +1,6 @@
 # baseURL
-@baseURL = http://localhost:3000
-@baseURLWorker = http://localhost:3000/api/v1/worker
+@baseURL = http://localhost:5000
+@baseURLWorker = http://localhost:5000/api/v1/worker
 
 ###
 # Create new raw material
