@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Routes } from "src/interfaces/route.interface";
+import { Routes } from "src/components/core/route.interface";
 import { WorkerController } from "./worker.controllers";
 
 class WorkerRoutes implements Routes {
