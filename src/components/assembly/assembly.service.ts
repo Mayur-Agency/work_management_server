@@ -1,8 +1,8 @@
 import { Assembly, Prisma } from "@prisma/client";
-import { AssemblyQueryParams, ICreateAssembly } from "src/interfaces/assembly.interface";
 import { HttpException } from "src/exceptions/httpExceptions";
 import PrismaService from "src/prisma/PrismaService";
 import { isEmpty } from "src/utils/helper.functions";
+import { AssemblyQueryParams, ICreateAssembly } from "./assembly.interface";
 
 export class AssemblyService {
   public prisma = PrismaService.getPrismaClient();
