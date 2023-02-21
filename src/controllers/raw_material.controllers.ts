@@ -4,7 +4,7 @@ import { asyncHandler } from "src/middlewares/async";
 import {
   CreateRawMaterialDto,
   UpdateRawMaterialDto,
-} from "../dtos/raw_materials.dto";
+} from "../interfaces/raw_materials.interface";
 import { RawMaterialService } from "../services/raw_material.service";
 
 export class RawMaterialController {

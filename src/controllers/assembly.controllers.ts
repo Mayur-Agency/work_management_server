@@ -1,5 +1,5 @@
 import { Assembly, Prisma } from "@prisma/client";
-import { ICreateAssembly } from "src/dtos/assembly.dto";
+import { ICreateAssembly } from "src/interfaces/assembly.interface";
 import { asyncHandler } from "src/middlewares/async";
 // import qs from 'qs'
 import { AssemblyService } from "../services/assembly.service";
