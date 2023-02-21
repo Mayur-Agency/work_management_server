@@ -2,8 +2,8 @@ import { Worker } from "@prisma/client";
 import { HttpException } from "src/exceptions/httpExceptions";
 import { asyncHandler } from "src/middlewares/async";
 import { parseBoolean } from "src/utils/helper.functions";
-import { CreateWorkerDto, UpdateWorkerDto } from "../interfaces/workers.interface";
-import { WorkerService } from "../services/worker.service";
+import { CreateWorkerDto, UpdateWorkerDto } from "./workers.interface";
+import { WorkerService } from "./worker.service";
 
 export class WorkerController {
   public workerService = new WorkerService();

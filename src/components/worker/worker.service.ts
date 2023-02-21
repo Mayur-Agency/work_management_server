@@ -1,7 +1,7 @@
 import { Worker, Prisma } from "@prisma/client";
 
 import { HttpException } from "src/exceptions/httpExceptions";
-import { FindWorkerByIdArgs } from "src/interfaces/workers.interface";
+import { FindWorkerByIdArgs } from "./workers.interface";
 import PrismaService from "src/prisma/PrismaService";
 import { isEmpty } from "src/utils/helper.functions";
 

@@ -2,7 +2,7 @@ import App from "./app";
 import AssemblyRoutes from "./components/assembly/assembly.routes";
 import RawMaterialRoutes from "./components/rawMaterial/raw_material.routes";
 import IndexRoutes from "./routes/index.routes";
-import WorkerRoutes from "./routes/worker.routes";
+import WorkerRoutes from "./components/worker/worker.routes";
 
 const app = new App([
   new IndexRoutes(),

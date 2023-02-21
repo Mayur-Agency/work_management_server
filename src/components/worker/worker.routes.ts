@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { WorkerController } from "src/controllers/worker.controllers";
 import { Routes } from "src/interfaces/route.interface";
+import { WorkerController } from "./worker.controllers";
 
 class WorkerRoutes implements Routes {
   public path = "/api/v1/worker/";
